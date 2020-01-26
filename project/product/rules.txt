@@ -5,14 +5,14 @@
     "condition" :{
                  "value1" :{
                            "type" :"regular",
-                           "name" :"score",
+                           "property" :"score",
                            "object" :"person",
                            "default" :"0" 
                            },
                  "operator" :"LT",          
                  "value2" :{
                            "type" :"regular",
-                           "name" :"score",
+                           "property" :"score",
                            "object" :"none",
                            "default" :"720" 
                            }
@@ -28,15 +28,15 @@
     "ruleName" :"scoreMoreRule",
     "condition" :{
                  "value1" :{
-                           "type" :"INT",
-                           "name" :"score",
+                           "type" :"regular",
+                           "property" :"score",
                            "object" :"person",
                            "default" :"0" 
                            },
                  "operator" :"GE",          
                  "value2" :{
-                           "type" :"INT",
-                           "name" :"score",
+                           "type" :"regular",
+                           "property" :"score",
                            "object" :"none",
                            "default" :"720" 
                            }

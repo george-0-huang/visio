@@ -12,7 +12,7 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "rule_engine.h"
 #include "action_interpreter.h"
-
+#include "condition_interpreter.h"
 
 using namespace visio;
 using namespace errorreport;
@@ -103,7 +103,8 @@ bool RuleEngine::Condition(
     std::shared_ptr<Product> product,
     std::shared_ptr<Person> person)
 {
-    return true;
+    ConditionInterpreter condition(condtion_tree, product, person);
+    return condition.Value();
 }
 
 std::string RuleEngine::DoAction(
