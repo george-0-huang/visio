@@ -15,25 +15,32 @@
 namespace visio
 {
 
-class ValueInterpreter;
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-//Class Name:  ConditionInterpreter
-//Description: 
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-class ConditionInterpreter
+class ValueInterpreter
 {
 public:
-    ConditionInterpreter(
-        const boost::property_tree::ptree& condtion_tree,
+    enum class eValueType
+    {
+        eNumber,
+        eBoolean   //boolean value will be represented as [std::string("0"), std::string("1")]
+    };
+
+    ValueInterpreter(
+        const boost::property_tree::ptree& value_tree,
         std::shared_ptr<Product> product,
         std::shared_ptr<Person> person);
 
-    bool Value() { return value_; }
+    std::string Value() { return value_; }
+
+    bool BoolValueHelper();
+    float NumberValueHelper();
 
 protected:
-    void Operation(ValueInterpreter& value1, ValueInterpreter& value2, std::string& operation_value);
+    void Operation(const std::string& property_name, const std::string& operator_value, float value, float change);
     std::shared_ptr<Product> product_;
     std::shared_ptr<Person> person_;
-    bool value_;
+
+    std::string value_;
+    eValueType value_type_;
 };
+
 }

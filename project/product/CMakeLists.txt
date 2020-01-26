@@ -16,6 +16,8 @@ add_executable(product
     ../rule/action_interpreter.cpp
     ../rule/condition_interpreter.h
     ../rule/condition_interpreter.cpp
+    ../rule/value_interpreter.h
+    ../rule/value_interpreter.cpp
     ../person/person.h
     main.cpp
     arg_parser.h
