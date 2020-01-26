@@ -49,8 +49,6 @@ std::string ActionHistory::Report()
 }
 
 
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 RuleEngine::RuleEngine(std::string name)
 {
@@ -110,23 +108,7 @@ bool RuleEngine::Condition(
 std::string RuleEngine::DoAction(
     const boost::property_tree::ptree& action_tree,
     std::shared_ptr<Product> product)
-{
-    auto object_node = action_tree.get_child("object");
-    std::string object_value = object_node.get_value("");
-    std::cout << object_value << std::endl;
-    ThrowExceptionOnFalseWithReason((object_value.compare("product") == 0), Errors::kUserError, "Only support action on product");
-    
-    auto property_node = action_tree.get_child("property");
-    std::string property_name = property_node.get_value("");
-    std::cout << property_name << std::endl;
-
-    auto operation_node = action_tree.get_child("operator");
-    std::string operation_value = operation_node.get_value("");
-    std::cout << operation_value << std::endl;
-
-    auto value_node = action_tree.get_child("value");
-    std::string value_value = value_node.get_value("");
-    
-    ActionInterpreter interpeter(product, property_name, operation_value, Product::StringToFloat(value_value));
-    return  operation_value + value_value;
+{  
+    ActionInterpreter interpeter(product, action_tree);
+    return  interpeter.Report();
 }
