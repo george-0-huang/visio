@@ -25,7 +25,9 @@ ActionHistory::ActionHistory(std::shared_ptr<Product> product) :
     std::string rate;
     ThrowExceptionOnFalseWithReason(product->GetAttribute("rate", rate), Errors::kInternal,
         "rate property is missing");
-  
+    std::string disqualified;
+    ThrowExceptionOnFalseWithReason(product_->GetAttribute("disqualified", disqualified), Errors::kInternal,
+        "disqualified property is missing");
     history_ += rate;
 }
 
@@ -42,10 +44,14 @@ void ActionHistory::Record(std::string new_record)
 std::string ActionHistory::Report()
 {
     std::string rate;
-    ThrowExceptionOnFalseWithReason(product_->GetAttribute("rate", rate), Errors::kInternal,
-        "rate property is missing");
+    product_->GetAttribute("rate", rate);
 
-    return std::string("product.interest_rate == ") + rate + std::string(" (") + history_ + std::string(")\n");
+    std::string disqualified;
+    product_->GetAttribute("disqualified", disqualified);
+    std::string disqualified_bool = (disqualified.compare("0") == 0)? std::string("false"): std::string("true");
+
+    return std::string("product.interest_rate == ") + rate + std::string(" (") + history_ + std::string(")\n") +
+        std::string("product.disqualified == ") + disqualified_bool + std::string("\n");
 }
 
 
