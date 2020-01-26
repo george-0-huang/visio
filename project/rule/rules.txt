@@ -1,0 +1,60 @@
+{
+"ruleList" :[
+    {
+    "ruleName" :"scoreLessRule",
+	"condition" :{
+				 "value1" :{
+						   "type" :"INT",
+						   "name" :"score",
+						   "table" :"person",
+						   "key" :"none",
+						   "default" :0 
+						   },
+				 "operator" :"LT",          
+				 "value2" :{
+						   "type" :"INT",
+						   "name" :"score",
+						   "table" :"none",
+						   "key" :"none",
+						   "default" :720 
+						   }
+				  },
+	"action" :{
+			  "name" :"rate",
+			  "table" :"product",
+			  "key" :"none",                
+			  "operator" :"-",
+			  "scalc" :100,
+			  "value" :5                          
+			  }
+	},
+    {
+    "ruleName" :"scoreMoreRule",
+	"condition" :{
+				 "value1" :{
+						   "type" :"INT",
+						   "name" :"score",
+						   "table" :"person",
+						   "key" :"none",
+						   "default" :0 
+						   },
+				 "operator" :"GE",          
+				 "value2" :{
+						   "type" :"INT",
+						   "name" :"score",
+						   "table" :"none",
+						   "key" :"none",
+						   "default" :720 
+						   }
+				  },
+	"action" :{
+			  "name" :"rate",
+			  "table" :"product",
+			  "key" :"none",                
+			  "operator" :"+",
+			  "scalc" :100,
+			  "value" :5                          
+			  }
+	}	
+]
+}

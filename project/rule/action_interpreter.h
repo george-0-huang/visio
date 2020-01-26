@@ -1,0 +1,32 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Autohor George Huang
+//Revised 1/25/20020
+//Copyright 2020
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma once
+#include "../error.h"
+#include "../exception_handler.h"
+#include "../product/product.h"
+#include <memory>
+#include <string>
+
+namespace visio
+{
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Class Name:  ActionInterpreter
+//Description: 
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+class ActionInterpreter
+{
+public:
+    ActionInterpreter(
+        std::shared_ptr<Product> product,
+        const std::string& property_name,
+        const std::string& operator_value,
+        float change);
+
+protected:
+    void Operation(const std::string& property_name, const std::string& operator_value, float value, float change);
+    std::shared_ptr<Product> product_;
+};
+}
