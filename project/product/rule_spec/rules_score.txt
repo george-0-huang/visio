@@ -14,7 +14,7 @@
                            "type" :"number",
                            "property" :"score",
                            "object" :"none",
-                           "default" :"360" 
+                           "default" :"720" 
                            }
                   },
     "action" :{
@@ -33,7 +33,7 @@
                            "object" :"person",
                            "default" :"0" 
                            },
-                 "operator" :"GE",          
+                 "operator" :"GT",          
                  "value2" :{
                            "type" :"number",
                            "property" :"score",
@@ -45,7 +45,7 @@
               "property" :"rate",
               "object" :"product",
               "operator" :"-",
-              "value" :"0.5"
+              "value" :"0.3"
               }
     }    
 ]

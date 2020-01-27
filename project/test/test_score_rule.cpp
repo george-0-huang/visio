@@ -58,8 +58,8 @@ namespace testscorerule
         EXPECT_NO_THROW(product->GetAttribute("rate", result_rate));
 
         float expect_result_rate = default_rate_;
-        if (score >= 720) expect_result_rate -= 0.5;
-        if (score < 360) expect_result_rate += 0.5;
+        if (score > 720) expect_result_rate -= float(0.3);
+        if (score < 720) expect_result_rate += float(0.5);
         EXPECT_EQ(stof(result_rate), expect_result_rate);
 
         std::string result_disqualified;
