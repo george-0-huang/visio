@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 
         RuleEngine engine(params.GetRuleFile());
 
-        engine.ApplyRuleToProductAndPeron(params.GetProduct(), params.GetPerson());
+        engine.ApplyRuleToProductAndPerson(params.GetProduct(), params.GetPerson());
 
         return Errors::kSuccess;
     }

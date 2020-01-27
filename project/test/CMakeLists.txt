@@ -46,8 +46,24 @@ add_definitions(-D _ENABLE_ATOMIC_ALIGNMENT_FIX)
 add_executable(test 
     ../exception_handler.h
     ../exception_handler.cpp
+    ../attribute.h
+    ../exception_handler.h
+    ../exception_handler.cpp
+    ../rule/rule_engine.h
+    ../rule/rule_engine.cpp
+    ../rule/action_interpreter.h
+    ../rule/action_interpreter.cpp
+    ../rule/condition_interpreter.h
+    ../rule/condition_interpreter.cpp
+    ../rule/value_interpreter.h
+    ../rule/value_interpreter.cpp
+    ../person/person.h
+    test_score_rule.cpp
+    test_state_rule.cpp
+    test_product_name_rule.cpp
     test_exception_handler.cpp
     )
-target_link_libraries(test gtest_main)
+target_include_directories(test PUBLIC ${Boost_INCLUDE_DIRS})
+target_link_libraries(test gtest_main ${Boost_LIBRARIES})
 add_test(NAME unit_test COMMAND test)
 

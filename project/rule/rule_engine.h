@@ -39,7 +39,7 @@ public:
     explicit RuleEngine(std::string name);
     ~RuleEngine();
 
-    void ApplyRuleToProductAndPeron(std::shared_ptr<Product> product, std::shared_ptr<Person> person);
+    void ApplyRuleToProductAndPerson(std::shared_ptr<Product> product, std::shared_ptr<Person> person);
 protected:
     bool Condition(
         const boost::property_tree::ptree& condition_tree,

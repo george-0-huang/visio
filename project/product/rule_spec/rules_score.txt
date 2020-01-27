@@ -14,7 +14,7 @@
                            "type" :"number",
                            "property" :"score",
                            "object" :"none",
-                           "default" :"720" 
+                           "default" :"360" 
                            }
                   },
     "action" :{

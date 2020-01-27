@@ -83,7 +83,7 @@ RuleEngine::~RuleEngine()
 }
 
 
-void RuleEngine::ApplyRuleToProductAndPeron(std::shared_ptr<Product> product, std::shared_ptr<Person> person)
+void RuleEngine::ApplyRuleToProductAndPerson(std::shared_ptr<Product> product, std::shared_ptr<Person> person)
 {
     try {
         ActionHistory history(product);
