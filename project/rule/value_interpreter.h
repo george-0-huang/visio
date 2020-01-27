@@ -21,6 +21,7 @@ public:
     enum class eValueType
     {
         eNumber,
+        eString,
         eBoolean   //boolean value will be represented as [std::string("0"), std::string("1")]
     };
 

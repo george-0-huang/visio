@@ -90,7 +90,6 @@ void RuleEngine::ApplyRuleToProductAndPeron(std::shared_ptr<Product> product, st
         for (auto& v : property_tree_.get_child("ruleList"))
         {
             auto node = v.second.get_child("ruleName");
-            std::cout << node.get_value("") << std::endl;
             if (Condition(v.second.get_child("condition"), product, person))
             {
                 history.Record(DoAction(v.second.get_child("action"), product));

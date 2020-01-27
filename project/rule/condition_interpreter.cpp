@@ -33,6 +33,17 @@ namespace visio
         {"NE", CompExpression::NE}
     };
 
+
+    enum class StringCompExpression {
+        MATCH,
+        CONTAIN,
+    };
+
+    std::map<std::string, StringCompExpression> sMapStringCompExpression = {
+        {"MATCH", StringCompExpression::MATCH},
+        {"CONTAIN", StringCompExpression::CONTAIN}
+    };
+
     enum class LogicalExpression {
         AND,
         OR
@@ -59,15 +70,12 @@ ConditionInterpreter::ConditionInterpreter(
     auto value1_node = condtion_tree.get_child("value1");
 
     std::string property_name = value1_node.get_value("");
-    std::cout << property_name << std::endl;
 
     auto operation_node = condtion_tree.get_child("operator");
     std::string operation_value = operation_node.get_value("");
-    std::cout << operation_value << std::endl;
 
     auto value2_node = condtion_tree.get_child("value2");
     std::string property_name2 = value2_node.get_value("");
-    std::cout << property_name2 << std::endl;
 
     ValueInterpreter value1_interpreter(value1_node, product, person);
     ValueInterpreter value2_interpreter(value2_node, product, person);
@@ -77,37 +85,55 @@ ConditionInterpreter::ConditionInterpreter(
 
 void ConditionInterpreter::Operation(ValueInterpreter& value1, ValueInterpreter& value2, std::string& operation_value)
 {
-    switch (sMapCompExpression[operation_value])
+    if (sMapCompExpression.find(operation_value) != sMapCompExpression.end())
     {
-    case CompExpression::EQ:
-        value_ = (value1.NumberValueHelper() == value2.NumberValueHelper());
-        break;
-    case CompExpression::LT:
-        value_ = (value1.NumberValueHelper() < value2.NumberValueHelper());
-        break;
-    case CompExpression::GT:
-        value_ = (value1.NumberValueHelper() > value2.NumberValueHelper());
-        break;
-    case CompExpression::LE:
-        value_ = (value1.NumberValueHelper() <= value2.NumberValueHelper());
-        break;
-    case CompExpression::GE:
-        value_ = (value1.NumberValueHelper() >= value2.NumberValueHelper());
-        break;
-    case CompExpression::NE:
-        value_ = (value1.NumberValueHelper() != value2.NumberValueHelper());
-        break;
-    default:
+        switch (sMapCompExpression[operation_value])
+        {
+        case CompExpression::EQ:
+            value_ = (value1.NumberValueHelper() == value2.NumberValueHelper());
+            return;
+        case CompExpression::LT:
+            value_ = (value1.NumberValueHelper() < value2.NumberValueHelper());
+            return;
+        case CompExpression::GT:
+            value_ = (value1.NumberValueHelper() > value2.NumberValueHelper());
+            return;
+        case CompExpression::LE:
+            value_ = (value1.NumberValueHelper() <= value2.NumberValueHelper());
+            return;
+        case CompExpression::GE:
+            value_ = (value1.NumberValueHelper() >= value2.NumberValueHelper());
+            return;
+        case CompExpression::NE:
+            value_ = (value1.NumberValueHelper() != value2.NumberValueHelper());
+            return;
+        };
+    }
+ 
+    if (sMapStringCompExpression.find(operation_value) != sMapStringCompExpression.end())
+    {
+        switch (sMapStringCompExpression[operation_value])
+        {
+        case StringCompExpression::MATCH:
+            value_ = (value2.Value().compare(value1.Value()) == 0);
+            return;
+        case StringCompExpression::CONTAIN:
+            value_ = (value2.Value().find(value1.Value()) != std::string::npos);
+            return;
+        };
+    }
+
+    if (sMapLogicalExpression.find(operation_value) != sMapLogicalExpression.end())
+    {
         switch (sMapLogicalExpression[operation_value])
         {
         case LogicalExpression::AND:
             value_ = (value1.BoolValueHelper() && value2.BoolValueHelper());
-            break;
+            return;
         case LogicalExpression::OR:
             value_ = (value1.BoolValueHelper() || value2.BoolValueHelper());
-            break;
-        default:
-            ThrowExceptionOnFalseWithReason(false, Errors::kInternal, "not supported condition operator");
+            return;
         }
     }
+    ThrowExceptionOnFalseWithReason(false, Errors::kInternal, "not supported condition operator");
 }

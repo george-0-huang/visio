@@ -1,0 +1,29 @@
+{
+"ruleList" :[
+    {
+    "ruleName" :"ProductNameRule",
+    "condition" :{
+                 "value1" :{
+                           "type" :"string",
+                           "property" :"name",
+                           "object" :"product",
+                           "default" :"none" 
+                           },
+                 "operator" :"MATCH",          
+                 "value2" :{
+                           "type" :"string",
+                           "property" :"name",
+                           "object" :"none",
+                           "default" :"7-1 ARM" 
+                           }
+                  },
+    "action" :{
+              "property" :"rate",
+              "object" :"product",
+              "operator" :"+",
+              "value" :"0.5"
+              }
+    }
+
+]
+}

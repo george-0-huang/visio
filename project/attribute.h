@@ -35,7 +35,7 @@ public:
         return false;
     }
 
-    bool SetAttribute(const std::string& attribute_name, std::string& value)
+    bool SetAttribute(const std::string& attribute_name, const std::string& value)
     {
         std::map<std::string, std::string>::iterator it = value_map_.end();
         if (value_map_.find(attribute_name) != it)

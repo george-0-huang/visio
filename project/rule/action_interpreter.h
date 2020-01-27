@@ -27,7 +27,11 @@ public:
 
     std::string Report() { return action_report_; }
 protected:
-    void Operation(const std::string& property_name, const std::string& operator_value, float value, float change);
+    void Operation(
+        const std::string& property_name, 
+        const std::string& operator_value, 
+        const std::string& value, 
+        const std::string& change);
     std::shared_ptr<Product> product_;
 
     std::string action_report_;

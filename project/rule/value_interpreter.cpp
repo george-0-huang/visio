@@ -26,21 +26,36 @@ ValueInterpreter::ValueInterpreter(
 
     auto type_node = value_tree.get_child("type");
     std::string type_value = type_node.get_value("");
-    if (type_value.compare("regular") == 0)
+    if (type_value.compare("condistion") == 0)
     {
+        value_type_ = eValueType::eBoolean;
+        auto sub_condition_node = value_tree.get_child("condition");
+        ConditionInterpreter subCondition(sub_condition_node, product_, person_);
+        value_ = (subCondition.Value() ? std::string("1") : std::string("0"));
+    }
+    else
+    {
+        if (type_value.compare("number") == 0)
+        {
+            value_type_ = eValueType::eNumber;
+        }
+        else if (type_value.compare("string") == 0)
+        {
+            value_type_ = eValueType::eNumber;
+        }
+        else
+        {
+            ThrowExceptionOnFalseWithReason(false, Errors::kInternal, "unsupported value type");
+        }
         auto property_node = value_tree.get_child("property");
         std::string property_name = property_node.get_value("");
-        std::cout << property_name << std::endl;
 
         auto object_node = value_tree.get_child("object");
         std::string object_value = object_node.get_value("");
-        std::cout << object_value << std::endl;
 
         auto default_node = value_tree.get_child("default");
         std::string default_value = default_node.get_value("");
-        std::cout << default_value << std::endl;
 
-        value_type_ = eValueType::eNumber;
         if (object_value.compare("none") == 0)
         {
             value_ = default_value;
@@ -49,7 +64,7 @@ ValueInterpreter::ValueInterpreter(
         {
             person_->GetAttribute(property_name, value_);
         }
-        else if (object_value.compare("prodcut") == 0)
+        else if (object_value.compare("product") == 0)
         {
             product_->GetAttribute(property_name, value_);
         }
@@ -57,14 +72,7 @@ ValueInterpreter::ValueInterpreter(
         {
             ThrowExceptionOnFalseWithReason(false, Errors::kInternal, "unsupported object");
         }
-    }
-    else
-    {
-        value_type_ = eValueType::eBoolean;
-        auto sub_condition_node = value_tree.get_child("condition");
-        ConditionInterpreter subCondition(sub_condition_node, product_, person_);
-        value_ = (subCondition.Value() ? std::string("1") : std::string("0"));
-    }
+    } 
 }
 
 

@@ -16,12 +16,14 @@ namespace visio
 {
     enum class MathExpression {
         Add,
-        Sub
+        Sub,
+        Assign
     };
 
     std::map<std::string, MathExpression> sMapMathExpression = {
         {"+", MathExpression::Add},
-        {"-", MathExpression::Sub}
+        {"-", MathExpression::Sub},
+        {"=", MathExpression::Assign}
     };
 }
 
@@ -34,50 +36,65 @@ ActionInterpreter::ActionInterpreter(
 {
     auto object_node = action_tree.get_child("object");
     std::string object_value = object_node.get_value("");
-    std::cout << object_value << std::endl;
     ThrowExceptionOnFalseWithReason((object_value.compare("product") == 0), Errors::kUserError, "Only support action on product");
 
     auto property_node = action_tree.get_child("property");
     std::string property_name = property_node.get_value("");
-    std::cout << property_name << std::endl;
 
     auto operation_node = action_tree.get_child("operator");
     std::string operation_value = operation_node.get_value("");
-    std::cout << operation_value << std::endl;
 
     auto value_node = action_tree.get_child("value");
     std::string value_value = value_node.get_value("");
-    float change = Product::StringToFloat(value_value);
 
     ThrowExceptionOnFalseWithReason(product_, Errors::kInternal, "product_ == nullptr");
-
     std::string property_value;
     ThrowExceptionOnFalseWithReason(product_->GetAttribute(property_name, property_value),
-        Errors::kInternal, "not supporte product property");
+        Errors::kInternal, "not supported product property");
 
-    Operation(property_name, operation_value, Product::StringToFloat(property_value), change);
-
-    action_report_ = operation_value + value_value;
+    Operation(property_name, operation_value, property_value, value_value);
 }
 
-void ActionInterpreter::Operation(const std::string& property_name, const std::string& operator_value, float value, float change)
+void ActionInterpreter::Operation(
+    const std::string& property_name, 
+    const std::string& operator_value, 
+    const std::string& property_value, 
+    const std::string& value_value)
 {
-    switch (sMapMathExpression[operator_value])
+
+    if (sMapMathExpression.find(operator_value) != sMapMathExpression.end())
     {
-    case MathExpression::Add:
-        product_->SetAttribute(property_name, Product::FloatToString(value + change));
-        break;
-    case MathExpression::Sub:
-        if (value > change)
+        switch (sMapMathExpression[operator_value])
         {
-            product_->SetAttribute(property_name, Product::FloatToString(value - change));
-        }
-        else
+        case MathExpression::Add:
         {
-            product_->SetAttribute(property_name, Product::FloatToString(0));
+            float value = Product::StringToFloat(property_value) + Product::StringToFloat(value_value);
+            product_->SetAttribute(property_name, Product::FloatToString(value));
+            action_report_ = operator_value + value_value;
+            return;
         }
-        break;
-    default:
-        ThrowExceptionOnFalseWithReason(false, Errors::kInternal, "not supported action operator");
+        case MathExpression::Sub:
+        {
+            float value = Product::StringToFloat(property_value);
+            float change = Product::StringToFloat(value_value);
+            if (value > change)
+            {
+                product_->SetAttribute(property_name, Product::FloatToString(value - change));
+            }
+            else
+            {
+                product_->SetAttribute(property_name, Product::FloatToString(0));
+            }
+            action_report_ = operator_value + value_value;
+            return;
+        }
+        case MathExpression::Assign:
+        {
+            product_->SetAttribute(property_name, value_value);
+            return;
+        }
+        }
     }
+
+    ThrowExceptionOnFalseWithReason(false, Errors::kInternal, "not supported action operator");    
 }
