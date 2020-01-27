@@ -48,7 +48,7 @@ namespace testproductnamerule
         std::string state = GetParam().person_state;
         std::string product_name = GetParam().product_name;
 
-        RuleEngine engine("rule_spec/rules_product_name.txt");
+        RuleEngine engine("rule_samples/rules_product_name.txt");
         std::shared_ptr<Person> person = std::shared_ptr<Person>(new Person(score, state));
         std::shared_ptr<Product> product = std::shared_ptr<Product>(new Product(product_name));
 

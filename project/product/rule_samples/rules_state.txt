@@ -6,15 +6,15 @@
                  "value1" :{
                            "type" :"string",
                            "property" :"state",
-                           "object" :"person",
-                           "default" :"none" 
+                           "object" :"none",
+                           "default" :"florida" 
                            },
                  "operator" :"MATCH",
                  "value2" :{
                            "type" :"string",
                            "property" :"state",
-                           "object" :"none",
-                           "default" :"florida" 
+                           "object" :"person",
+                           "default" :"none" 
                            }
                   },
     "action" :{

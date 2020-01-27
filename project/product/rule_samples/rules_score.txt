@@ -33,7 +33,7 @@
                            "object" :"person",
                            "default" :"0" 
                            },
-                 "operator" :"GT",          
+                 "operator" :"GE",          
                  "value2" :{
                            "type" :"number",
                            "property" :"score",

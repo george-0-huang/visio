@@ -48,7 +48,7 @@ namespace testscorerule
         std::string state = GetParam().person_state;
         std::string product_name = GetParam().product_name;
 
-        RuleEngine engine("rule_spec/rules_score.txt");
+        RuleEngine engine("rule_samples/rules_score.txt");
         std::shared_ptr<Person> person = std::shared_ptr<Person>(new Person(score, state));
         std::shared_ptr<Product> product = std::shared_ptr<Product>(new Product(product_name));
 
@@ -58,7 +58,7 @@ namespace testscorerule
         EXPECT_NO_THROW(product->GetAttribute("rate", result_rate));
 
         float expect_result_rate = default_rate_;
-        if (score > 720) expect_result_rate -= float(0.3);
+        if (score >= 720) expect_result_rate -= float(0.3);
         if (score < 720) expect_result_rate += float(0.5);
         EXPECT_EQ(stof(result_rate), expect_result_rate);
 
