@@ -1,6 +1,6 @@
 # Dynamic Rule-based Pricing System
 
-    Develop a solution that allows the business to dynamically generating product pricing from a set rules defined 
+    Develop a solution that allows the business to dynamically generating product pricing from a set of rules defined 
     by the finance team. The finance team has given you an initial set of rules on how to price the products, 
     however, these rules could change at any time so we need to be able to update the rules easily and rerun the 
     product pricing to see the new prices of the products
