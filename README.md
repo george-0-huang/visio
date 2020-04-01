@@ -7,7 +7,7 @@
 
 ## Getting Started
 
-    This project provide the source code to produce a software : produce.exe , which enable finance team to define 
+    This project provide the source code to produce a software : product.exe , which enable finance team to define 
     or update a JSON based rule to drive the software to generate the rule-based price. 
 
     The instructions below will cover the steps to build the project on windows 10 system to produce the binary 
