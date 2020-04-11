@@ -26,7 +26,30 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |
-        mkdir build 
-        cd build
-        cmake ..\proejct -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=%BOOST_ROOT_1_72_0%
-        cmake --build . 
+        execute_process(
+           COMMAND mkdir build
+           RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+           message(FATAL_ERROR "Bad mkdir build status")
+
+        execute_process(
+           COMMAND cd build
+           RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+           message(FATAL_ERROR "Bad cd build status")
+        
+        execute_process(
+           COMMAND cmake ..\proejct -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=%BOOST_ROOT_1_72_0%
+           RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+           message(FATAL_ERROR "Init build status")
+ 
+        execute_process(
+           COMMAND cmake --build . 
+           RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+           message(FATAL_ERROR "Build status")
