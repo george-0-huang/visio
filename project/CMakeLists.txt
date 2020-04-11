@@ -4,8 +4,7 @@
 cmake_minimum_required (VERSION 3.8)
 
 project ("project")
-
-set(BOOST_ROOT "D:\\boost_1_72_0") # either set it here or from the command line  
+ 
 set(Boost_USE_STATIC_LIBS ON) 
 set(Boost_USE_MULTITHREADED ON)  
 set(Boost_USE_STATIC_RUNTIME ON) 
