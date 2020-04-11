@@ -1,0 +1,33 @@
+name: Rue Engine CI
+
+on: [push, pull_request]
+
+env:
+
+  CMAKE_VERSION: 3.16.2
+
+  BUILD_TYPE: Release
+
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - {
+            name: "Windows Latest MSVC", artifact: "Windows-MSVC.tar.xz",
+            os: windows-latest,
+            cc: "cl", cxx: "cl",
+            environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          }
+
+    steps:
+    - name: Build engine
+      shell: cmake -P {0}
+      run: |
+        mkdir build && cd build
+        cmake ..\proejct -DCMAKE_BUILD_TYPE=Release -DBOOST_ROOT=%BOOST_ROOT_1_72_0%
+        cmake --build . 
