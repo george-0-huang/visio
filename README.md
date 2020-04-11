@@ -42,7 +42,8 @@
     Download from
         "https://www.boost.org/users/download"
     Then  copy the unziped files to the windows machine in a folder
-	  For example: D:\boost_1_72_0
+	       For example: C:\boost_1_72_0
+	  set enviromnet variable BOOST_ROOT = C:\boost_1_72_0
 	
 
  
