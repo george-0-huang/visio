@@ -26,9 +26,6 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |
-        execute_process(
-          COMMAND mkdir build
-          RESULT_VARIABLE result
-        )
-        if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad mkdir build status")
+        set(ENV{CC} ${ { matrix.config.cc } })
+        set(ENV{CXX} ${ { matrix.config.cxx } })
+        execute_process(COMMAND mkdir build)
