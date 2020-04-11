@@ -43,7 +43,7 @@
         "https://www.boost.org/users/download"
     Then  copy the unziped files to the windows machine in a folder
 	       For example: C:\boost_1_72_0
-	  set enviromnet variable BOOST_ROOT = C:\boost_1_72_0
+	  set enviromnet variable BOOST_ROOT_1_72_0 = C:\boost_1_72_0
 	
 
  
@@ -65,12 +65,7 @@
         -----------rule_samples      //sample rule JSON files, used for unit test as well
         -------rule                  //source files for rule engine
         -------test                  //source files for unit , include sub CMakeLists to produce uint test's test.exe
-    And there are files under each relevant directory.
-
-    Note: If BOOST is not installed under D:\\boost_1_72_0
-          To match your BOOST path, update this line in c:\repo\visio\project\CMakeLists.txt 
-    		      set(BOOST_ROOT "D:\\boost_1_72_0")
-            
+    And there are files under each relevant directory.          
 
 --- Initialize cmake build once
 
@@ -78,7 +73,7 @@
     enter:  cd c:\repo\visio 
     enter:  mkdir build
     enter:  cd build 
-    enter:  cmake ..\proejct
+    enter:  cmake ..\proejct -DBOOST_ROOT=%BOOST_ROOT_1_72_0%
 
     Note: The project will automatically pull googletest dependency code from github, internet connection to github 
     is a prerequisite.
