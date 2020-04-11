@@ -26,7 +26,7 @@ ValueInterpreter::ValueInterpreter(
 
     auto type_node = value_tree.get_child("type");
     std::string type_value = type_node.get_value("");
-    if (type_value.compare("condistion") == 0)
+    if (type_value.compare("condition") == 0)
     {
         value_type_ = eValueType::eBoolean;
         auto sub_condition_node = value_tree.get_child("condition");

@@ -1,13 +1,13 @@
 # Dynamic Rule-based Pricing System
 
-    Develop a solution that allows the business to dynamically generating product pricing from a set rules defined 
+    Develop a solution that allows the business to dynamically generating product pricing from a set of rules defined 
     by the finance team. The finance team has given you an initial set of rules on how to price the products, 
     however, these rules could change at any time so we need to be able to update the rules easily and rerun the 
     product pricing to see the new prices of the products
 
 ## Getting Started
 
-    This project provide the source code to produce a software : produce.exe , which enable finance team to define 
+    This project provide the source code to produce a software : product.exe , which enable finance team to define 
     or update a JSON based rule to drive the software to generate the rule-based price. 
 
     The instructions below will cover the steps to build the project on windows 10 system to produce the binary 
@@ -71,43 +71,37 @@
     		      set(BOOST_ROOT "D:\\boost_1_72_0")
             
 
---- Create project.sln
+--- Initialize cmake build once
 
     Open "Developer Command Prompt for VS2019", in the command windows:
     enter:  cd c:\repo\visio 
-
-    Option 1: Create only the default debug build (for speedy development)
-    enter:  cmake proejct
-
-    Option 2: Create release build
-    enter:  cmake --build . --target ALL_BUILD --config Release
+    enter:  mkdir build
+    enter:  cd build 
+    enter:  cmake ..\proejct
 
     Note: The project will automatically pull googletest dependency code from github, internet connection to github 
     is a prerequisite.
    
 --- build the project:
-
-    Under the same "Developer Command Prompt for VS2019" windows under repo folder, 
-    for example c:\repo\visio 
     
-    enter:  msbuild proejct.sln 
+    enter:  cmake --build .
 
     The output binaries can be located at following locations
-        c:\repo\visio\product\debug\product.exe. 
-        c:\repo\visio\test\debug\test.exe. 
+        c:\repo\visio\build\product\debug\product.exe. 
+        c:\repo\visio\build\test\debug\test.exe. 
 
 ## Running the tests
 
-    Copy c:\repo\visio\project\product\run_sample folder to c:\repo\visio\test\debug\
+    Copy c:\repo\visio\project\product\run_sample folder to c:\repo\visio\build\test\debug\
     
-    Expect to have these files under c:\repo\visio\test\debug
+    Expect to have these files under c:\repo\visio\build\test\debug
         test.exe
         rule_sample\rule_score.txt
         rule_sample\rule_state.txt
         rule_sample\rule_product_name.txt
 
     Then open a cmd windows:
-        enter: cd c:\repo\visio\test]debug
+        enter: cd c:\repo\visio\build\test]debug
         enter: test 
     The test will execuate all 24 unit tests.
 
@@ -121,9 +115,9 @@
    For example, (if you chose to leave product.exe at build export dir)
    
    
-   enter: cd c:\repo\visio\product\debug
+   enter: cd c:\repo\visio\build\product\debug
    
-   enter: prodcut "7-1 ARM" 720 texas "c:\repo\visio\prodcut\debug\rule_sample\rule_score.txt" 
+   enter: prodcut "7-1 ARM" 720 texas "c:\repo\visio\prodcut\build\debug\rule_sample\rule_score.txt" 
    
    it will generate following result:
    
