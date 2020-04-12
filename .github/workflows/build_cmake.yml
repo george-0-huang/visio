@@ -37,7 +37,7 @@ jobs:
         endif() 
         
         message(STATUS "workspace = ${{github.workspace}}")
-        message(STATUS "workspace2 = ${github.workspace}")
+        message(STATUS "workspace2 = ${{GITHUB_WORKSPACE}}")
         
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
