@@ -31,7 +31,7 @@ jobs:
         execute_process(COMMAND cd
           OUTPUT_VARIABLE out
         )
-        message(STATUS current dir = ${out}")
+        message(STATUS "current dir = ${out}")
         
         execute_process(COMMAND mkdir build
           RESULT_VARIABLE result
