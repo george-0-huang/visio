@@ -50,7 +50,7 @@ jobs:
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
       run: |
-        execute_process(COMMAND xcopy /Y "./project/product/rule_samples/." "./test/Debug/."
+        execute_process(COMMAND xcopy ./project/product/rule_samples/.  ./test/Debug/.
           RESULT_VARIABLE result
            OUTPUT_VARIABLE out
         )
