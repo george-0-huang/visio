@@ -35,7 +35,7 @@ jobs:
         execute_process(COMMAND mkdir build
           RESULT_VARIABLE result
         )
-        //if (NOT result EQUAL 0)
+        if (NOT result EQUAL 0)
           message(FATAL_ERROR "Bad mkdir build status")
         endif() 
         
