@@ -26,7 +26,6 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |
-        set(ENV{CC} ${ { matrix.config.cc } })
         set(ENV{CXX} ${ { matrix.config.cxx } })
         execute_process(COMMAND mkdir build)
         execute_process(COMMAND cd build)
