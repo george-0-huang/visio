@@ -49,9 +49,13 @@ jobs:
     - name: Test program
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
+      env:
+        SRC_DIR: "./project/product/rule_samples"
+        DEST_DIR: "./test/Debug/rule_samples":  
       run: |
         
-        #execute_process(COMMAND xcopy ./project/product/rule_samples/.  ./test/Debug/.
+        message(STATUS "src dir : ${SRC_DIR}, dest_dir ${DEST_DIR}")
+        #execute_process(COMMAND xcopy  /i /Y ./project/product/rule_samples/.  ./test/Debug/.
         #  RESULT_VARIABLE result
         #  OUTPUT_VARIABLE out
         #)
