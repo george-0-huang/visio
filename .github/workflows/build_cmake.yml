@@ -45,15 +45,17 @@ jobs:
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Bad cmake --build : ${result}")
         endif()
+        
     - name: Test program
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
       run: |
         execute_process(COMMAND xcopy /Y "./project/product/rule_samples/." "./test/Debug/."
           RESULT_VARIABLE result
+           OUTPUT_VARIABLE out
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Copy Test data failed : ${result}")
+          message(FATAL_ERROR "Copy Test data failed : ${result}, ${out}")
         endif()
         
         execute_process(COMMAND ./test/Debug/test.exe
