@@ -38,7 +38,7 @@ jobs:
         
         message(STATUS "workspace = ${{github.workspace}}")
         message(STATUS "workspace2 = ${github.workspace}")
-        message(STATUS "workspace3 = ${{GITHUB_WORKSPACE}}")
+        message(STATUS "workspace3 = ${GITHUB_WORKSPACE}")
         
         execute_process(COMMAND dir ${{github.workspace}}
           OUTPUT_VARIABLE out
