@@ -51,10 +51,11 @@ jobs:
         
         #execute_process(COMMAND cd ${GITHUB_WORKSPACE}build
         execute_process(COMMAND cd build
+          WORKING_DIRECTORY ${GITHUB_WORKSPACE}
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad cd build dir status, ${result}")
+          message(FATAL_ERROR "Bad cd build dir status: ${result}")
         endif() 
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
