@@ -38,12 +38,12 @@ jobs:
         
         message(STATUS "workspace = ${{github.workspace}}")
         message(STATUS "workspace2 = ${github.workspace}")
-        message(STATUS "workspace3 = ${GITHUB_WORKSPACE}")
+        message(STATUS "workspace3 = ${{GITHUB_WORKSPACE}}")
         
-        execute_process(COMMAND dir
+        execute_process(COMMAND dir ${{github.workspace}}
           OUTPUT_VARIABLE out
         )
-        message(STATUS "dir after mkdir = ${out} and ${GITHUB_WORKSPACE}")
+        message(STATUS "dir after mkdir = ${out}")
         
         #execute_process(COMMAND icacls  ${GITHUB_WORKSPACE}build /grant Everyone:F
         #  RESULT_VARIABLE result
@@ -52,7 +52,7 @@ jobs:
         #  message(FATAL_ERROR "Bad icacls status")
         #endif() 
         
-        #execute_process(COMMAND cd ${GITHUB_WORKSPACE}build
+        #execute_process(COMMAND cd ${{github.workspace}}/build
         execute_process(COMMAND cd build
           WORKING_DIRECTORY ${{github.workspace}}
           RESULT_VARIABLE result
