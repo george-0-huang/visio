@@ -30,12 +30,12 @@ jobs:
       run: |      
         #execute_process(COMMAND cd ${GITHUB_WORKSPACE})
         #execute_process(COMMAND cd ..)
-        #execute_process(COMMAND mkdir build
-        #  RESULT_VARIABLE result
-        #)
-        #if (NOT result EQUAL 0)
-        #  message(FATAL_ERROR "Bad mkdir build status")
-        #endif() 
+        execute_process(COMMAND mkdir build
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Bad mkdir build status")
+        endif() 
         
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
@@ -54,7 +54,7 @@ jobs:
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad cd build dir status")
+          message(FATAL_ERROR "Bad cd build dir status, ${result}")
         endif() 
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
