@@ -21,20 +21,21 @@ jobs:
             cc: "cl", cxx: "cl",
             environment_script: "C:/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
-
+    env:
+      working-directry: ./build 
     steps:
-    #- uses: actions/checkout@v2
+    - uses: actions/checkout@v2
     - name: Build program
       shell: cmake -P {0}
       run: |      
         #execute_process(COMMAND cd ${GITHUB_WORKSPACE})
         #execute_process(COMMAND cd ..)
-        execute_process(COMMAND mkdir build
-          RESULT_VARIABLE result
-        )
-        if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad mkdir build status")
-        endif() 
+        #execute_process(COMMAND mkdir build
+        #  RESULT_VARIABLE result
+        #)
+        #if (NOT result EQUAL 0)
+        #  message(FATAL_ERROR "Bad mkdir build status")
+        #endif() 
         
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
