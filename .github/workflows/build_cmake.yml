@@ -36,6 +36,9 @@ jobs:
           message(FATAL_ERROR "Bad mkdir build status")
         endif() 
         
+        message(STATUS "workspace = ${{github.workspace}}")
+        message(STATUS "workspace2 = ${github.workspace}")
+        
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
