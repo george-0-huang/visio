@@ -44,11 +44,11 @@ jobs:
         )
         message(STATUS "dir after mkdir = ${out}")
                 
-        execute_process(COMMAND cd build
+        execute_process(COMMAND cd ./build
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad build dir status")
+          message(FATAL_ERROR "Bad cd build dir status")
         endif() 
         
         execute_process(COMMAND cmake ../project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%)
