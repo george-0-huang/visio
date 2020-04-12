@@ -28,7 +28,7 @@ jobs:
       run: |
         execute_process(COMMAND mkdir build)
         execute_process(COMMAND cd build)
-        execute_process(COMMAND cmake ..\project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%)
+        execute_process(COMMAND cmake ../project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%)
         execute_process(COMMAND cmake --build .
           RESULT_VARIABLE result
         )
