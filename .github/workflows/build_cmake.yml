@@ -26,45 +26,14 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
-      run: |      
-        #execute_process(COMMAND cd ${GITHUB_WORKSPACE})
-        execute_process(COMMAND cd
-          OUTPUT_VARIABLE out
-        )
-        message(STATUS "current dir = ${out}")
-        
-        execute_process(COMMAND mkdir build
+      run: |       
+        execute_process(COMMAND cmake project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad mkdir build status")
+          message(FATAL_ERROR "Bad cmake project : ${result}")
         endif() 
         
-        message(STATUS "workspace = ${{github.workspace}}")
-        #message(STATUS "workspace2 = ${github.workspace}")
-        #message(STATUS "workspace3 = ${GITHUB_WORKSPACE}")
-        
-        execute_process(COMMAND dir ${{github.workspace}}
-          OUTPUT_VARIABLE out
-        )
-        message(STATUS "dir after mkdir = ${out}")
-        
-        #execute_process(COMMAND icacls  ${GITHUB_WORKSPACE}build /grant Everyone:F
-        #  RESULT_VARIABLE result
-        #)
-        #if (NOT result EQUAL 0)
-        #  message(FATAL_ERROR "Bad icacls status")
-        #endif() 
-        
-        #execute_process(COMMAND cd ${{github.workspace}}\build
-        #execute_process(COMMAND cd ${{github.workspace}}\build
-        #  RESULT_VARIABLE result
-        #)
-        #if (NOT result EQUAL 0)
-        #  message(FATAL_ERROR "Bad cd build dir status: ${result}")
-        #endif() 
-       
-        execute_process(COMMAND cmake project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%)
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
@@ -74,5 +43,22 @@ jobs:
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Bad cmake --build status")
+          message(FATAL_ERROR "Bad cmake --build : ${result}")
+        endif()
+    - name: Test program
+      shell: cmake -P {0}
+      working-directory: ${{ github.workspace }}
+      run: |
+        execute_process(COMMAND xcopy .\project\product\rule_samples\. .\test\Debug\.
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Copy Test data failed : ${result}")
+        endif()
+        
+        execute_process(COMMAND .\test\Debug\test.exe
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Test failed : ${result}")
         endif()
