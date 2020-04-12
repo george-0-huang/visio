@@ -26,7 +26,16 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |
-        execute_process(COMMAND mkdir build)
+        execute_process(COMMAND cd)
+        execute_process(COMMAND dir)
+                
+        execute_process(COMMAND mkdir build
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Bad mkdir build status")
+        endif() 
+        
         execute_process(COMMAND cd build
           RESULT_VARIABLE result
         )
