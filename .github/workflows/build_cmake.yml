@@ -29,12 +29,12 @@ jobs:
         execute_process(COMMAND cd
           OUTPUT_VARIABLE out
         )
-        message(STATUS $(out))
+        message(STATUS ${out})
         
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
-        message(STATUS $(out))
+        message(STATUS $[out})
                        
         execute_process(COMMAND mkdir build
           RESULT_VARIABLE result
@@ -46,7 +46,7 @@ jobs:
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
-        message(STATUS $(out))
+        message(STATUS ${{out}})
                 
         execute_process(COMMAND cd build
           RESULT_VARIABLE result
