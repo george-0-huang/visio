@@ -26,6 +26,9 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |
+        execute_process(COMMAND cd ../../../
+          OUTPUT_VARIABLE out
+        )
         execute_process(COMMAND cd
           OUTPUT_VARIABLE out
         )
@@ -34,7 +37,7 @@ jobs:
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
-        message(STATUS "dir = $[out}")
+        message(STATUS "dir = ${out}")
                        
         execute_process(COMMAND mkdir build
           RESULT_VARIABLE result
