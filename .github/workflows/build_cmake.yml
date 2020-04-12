@@ -39,7 +39,7 @@ jobs:
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
-        message(STATUS "dir after mkdir = ${out} and ${GITHUB_WORKSPACE} and ${ github.workspace }")
+        message(STATUS "dir after mkdir = ${out} and ${GITHUB_WORKSPACE}")
         
         #execute_process(COMMAND icacls  ${GITHUB_WORKSPACE}build /grant Everyone:F
         #  RESULT_VARIABLE result
