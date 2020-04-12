@@ -52,9 +52,8 @@ jobs:
         #  message(FATAL_ERROR "Bad icacls status")
         #endif() 
         
-        #execute_process(COMMAND cd ${{github.workspace}}/build
-        execute_process(COMMAND cd build
-          WORKING_DIRECTORY ${{github.workspace}}
+        #execute_process(COMMAND cd ${{github.workspace}}\build
+        execute_process(COMMAND cd ${{github.workspace}}\build
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
