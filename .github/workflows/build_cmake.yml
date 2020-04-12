@@ -26,8 +26,7 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |
-        execute_process(COMMAND cd ../../../
-          OUTPUT_VARIABLE out
+        execute_process(COMMAND cd ../../)
         )
         execute_process(COMMAND cd
           OUTPUT_VARIABLE out
