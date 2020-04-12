@@ -25,6 +25,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build program
       shell: cmake -P {0}
+      working-directory: ${{ github.workspace }}
       run: |      
         #execute_process(COMMAND cd ${GITHUB_WORKSPACE})
         #execute_process(COMMAND cd ..)
@@ -38,7 +39,7 @@ jobs:
         execute_process(COMMAND dir
           OUTPUT_VARIABLE out
         )
-        message(STATUS "dir after mkdir = ${out} and ${GITHUB_WORKSPACE}")
+        message(STATUS "dir after mkdir = ${out} and ${GITHUB_WORKSPACE} and ${ github.workspace }")
         
         #execute_process(COMMAND icacls  ${GITHUB_WORKSPACE}build /grant Everyone:F
         #  RESULT_VARIABLE result
