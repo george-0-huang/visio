@@ -27,7 +27,13 @@ jobs:
       shell: cmake -P {0}
       run: |
         execute_process(COMMAND mkdir build)
-        execute_process(COMMAND cd build)
+        execute_process(COMMAND cd build
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Bad build dir status")
+        endif() 
+        
         execute_process(COMMAND cmake ../project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%)
         execute_process(COMMAND cmake --build .
           RESULT_VARIABLE result
