@@ -27,11 +27,7 @@ jobs:
     - name: Build program
       shell: cmake -P {0}
       run: |      
-        execute_process(COMMAND dir
-          OUTPUT_VARIABLE out
-        )
-        message(STATUS "dir = ${out}")
-                       
+        execute_process(COMMAND cd ${GITHUB_WORKSPACE})
         execute_process(COMMAND mkdir build
           RESULT_VARIABLE result
         )
@@ -44,13 +40,16 @@ jobs:
         )
         message(STATUS "dir after mkdir = ${out}")
                 
-        execute_process(COMMAND cd ./build
+        execute_process(COMMAND cd ${GITHUB_WORKSPACE}/build
           RESULT_VARIABLE result
         )
         #if (NOT result EQUAL 0)
         #  message(FATAL_ERROR "Bad cd build dir status")
         #endif() 
-        
+        execute_process(COMMAND dir
+          OUTPUT_VARIABLE out
+        )
+        message(STATUS "dir after cd build = ${out}")        
         execute_process(COMMAND cmake ../project -DBOOST_ROOT=%BOOST_ROOT_1_72_0%)
         execute_process(COMMAND cmake --build .
           RESULT_VARIABLE result
