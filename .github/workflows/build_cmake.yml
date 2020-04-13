@@ -66,12 +66,11 @@ jobs:
           OUTPUT_VARIABLE out
         )
         message(FATAL_ERROR "dir dest sample : ${out}")
-        
-                
-        execute_process(COMMAND dir "./test/Debug"
-          OUTPUT_VARIABLE out
-        )
-        message(FATAL_ERROR "dir dest : ${out}")
+                        
+        #execute_process(COMMAND dir "./test/Debug"
+        #  OUTPUT_VARIABLE out
+        #)
+        #message(FATAL_ERROR "dir dest : ${out}")
 
         execute_process(COMMAND test/Debug/test.exe
           RESULT_VARIABLE result
