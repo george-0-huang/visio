@@ -50,14 +50,14 @@ jobs:
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
       run: |
-        #set(SRC_DIR "project/product/rule_samples")
+        #set(SRC_DIR "project\\product\\rule_samples")
         #set(DEST_DIR "test/Debug/rule_samples")
-        set(SRC_DIR "project/product/rule_samples")
+        set(SRC_DIR "project\\product\\rule_samples")
         set(DEST_DIR "temp")
         message(STATUS "src dir= ${SRC_DIR}, dest_dir= ${DEST_DIR}")
         set(option "/I /Y")
         
-        execute_process(COMMAND xcopy ${SRC_DIR} ${DEST_DIR}
+        execute_process(COMMAND xcopy /I /Y ${SRC_DIR} ${DEST_DIR}
           RESULT_VARIABLE result
           OUTPUT_VARIABLE out
         )
