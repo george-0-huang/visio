@@ -62,10 +62,10 @@ jobs:
           message(FATAL_ERROR "Copy Test data failed : ${result}, ${out}")
         endif()
         
-        execute_process(COMMAND dir "./test/Debug/rule_samples"
-          OUTPUT_VARIABLE out
-        )
-        message(FATAL_ERROR "dir dest sample : ${out}")
+        #execute_process(COMMAND dir "./test/Debug/rule_samples"
+        #  OUTPUT_VARIABLE out
+        #)
+        #message(FATAL_ERROR "dir dest sample : ${out}")
                         
         #execute_process(COMMAND dir "./test/Debug"
         #  OUTPUT_VARIABLE out
