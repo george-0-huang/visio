@@ -26,4 +26,3 @@ add_executable(product
     )
 
 target_include_directories(product PUBLIC ${Boost_INCLUDE_DIRS}) 
-target_link_libraries(product ${Boost_LIBRARIES})
