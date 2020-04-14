@@ -78,3 +78,13 @@ jobs:
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Test failed : ${result}")
         endif()
+    - name: Create Export
+      shell: cmake -P {0}
+      working-directory: ${{ github.workspace }}
+      run: |
+        execute_process(COMMAND cmke --install .  --config Debug --prefix
+          RESULT_VARIABLE result
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Copy Test data failed : ${result}, ${out}")
+        endif()
