@@ -80,7 +80,19 @@ jobs:
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Install to export failed : ${result}, ${out}")
         endif()
-        execute_process(COMMAND dir export
+        execute_process(COMMAND dir build/export
           OUTPUT_VARIABLE out
         )        
         message(STATUS "dir export = ${out}") 
+
+    - name: Pack
+      shell: cmake -P {0}
+      working-directory: ${{ github.workspace }}
+      run: |
+        execute_process(COMMAND cmake -E tar cjfv ${{ matrix.config.artifact }} export
+          RESULT_VARIABLE result
+          OUTPUT_VARIABLE out
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Install to export failed : ${result}, ${out}")
+        endif()
