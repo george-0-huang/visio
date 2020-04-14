@@ -27,3 +27,5 @@ add_executable(product
 
 target_include_directories(product PUBLIC ${Boost_INCLUDE_DIRS})
  
+install(TARGETS product DESTINATION export)
+install(DIRECTORY rule_samples DESTINATION export)
