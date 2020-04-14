@@ -73,7 +73,12 @@ jobs:
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
       run: |
-        execute_process(COMMAND cmke --install .  --config Debug --prefix
+        execute_process(COMMAND dir product
+          OUTPUT_VARIABLE out
+        )        
+        message(STATUS "dir before install = ${out}") 
+        
+        execute_process(COMMAND cmke --install .  --config Release --prefix
           RESULT_VARIABLE result
           OUTPUT_VARIABLE out
         )
