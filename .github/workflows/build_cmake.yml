@@ -62,19 +62,26 @@ jobs:
           message(FATAL_ERROR "Copy Test data failed : ${result}, ${out}")
         endif()
         
-        #execute_process(COMMAND dir "./test/Debug/rule_samples"
-        #  OUTPUT_VARIABLE out
-        #)
-        #message(FATAL_ERROR "dir dest sample : ${out}")
-                        
-        #execute_process(COMMAND dir "./test/Debug"
-        #  OUTPUT_VARIABLE out
-        #)
-        #message(FATAL_ERROR "dir dest : ${out}")
-
         execute_process(COMMAND test/Debug/test.exe
           RESULT_VARIABLE result
         )
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Test failed : ${result}")
+        endif()
+        
+    - name: Create export
+      shell: cmake -P {0}
+      working-directory: ${{ github.workspace }}
+      run: |
+        execute_process(COMMAND dir product
+          OUTPUT_VARIABLE out
+        )        
+        message(STATUS "dir before install = ${out}") 
+        
+        execute_process(COMMAND cmke --install .  --config Release --prefix
+          RESULT_VARIABLE result
+          OUTPUT_VARIABLE out
+        )
+        if (NOT result EQUAL 0)
+          message(FATAL_ERROR "Install to export failed : ${result}, ${out}")
         endif()
