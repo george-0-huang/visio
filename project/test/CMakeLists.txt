@@ -67,4 +67,4 @@ target_include_directories(test PUBLIC ${Boost_INCLUDE_DIRS})
 target_link_libraries(test gtest_main ${Boost_FILESYSTEM_LIBRARY})
 add_test(NAME unit_test COMMAND test)
 
-# install(TARGETS test DESTINATION export)
+install(TARGETS test DESTINATION export)
