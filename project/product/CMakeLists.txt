@@ -25,4 +25,5 @@ add_executable(product
     product.h
     )
 
-target_include_directories(product PUBLIC ${Boost_INCLUDE_DIRS}) 
+target_include_directories(product PUBLIC ${Boost_INCLUDE_DIRS})
+ 
