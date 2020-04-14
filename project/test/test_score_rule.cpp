@@ -7,6 +7,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include "utility.h"
 
 using namespace visio;
 using namespace errorreport;
@@ -36,7 +37,7 @@ namespace testscorerule
         {721, "texas", "30FIX"},
     };
 
-    INSTANTIATE_TEST_CASE_P(
+    INSTANTIATE_TEST_SUITE_P(
         ScoreRuleTest,
         ScoreRuleTestFixture,
         ValuesIn(params)
@@ -48,7 +49,7 @@ namespace testscorerule
         std::string state = GetParam().person_state;
         std::string product_name = GetParam().product_name;
 
-        RuleEngine engine("rule_samples/rules_score.txt");
+        RuleEngine engine(testutility::RuleSampleFilePath("/rule_samples/rules_score.txt"));
         std::shared_ptr<Person> person = std::shared_ptr<Person>(new Person(score, state));
         std::shared_ptr<Product> product = std::shared_ptr<Product>(new Product(product_name));
 
