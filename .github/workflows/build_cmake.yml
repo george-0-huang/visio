@@ -85,7 +85,7 @@ jobs:
         )        
         message(STATUS "dir export = ${out}") 
 
-    - name: Pack
+    - name: Pack exort
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
       run: |
@@ -94,5 +94,11 @@ jobs:
           OUTPUT_VARIABLE out
         )
         if (NOT result EQUAL 0)
-          message(FATAL_ERROR "Install to export failed : ${result}, ${out}")
+          message(FATAL_ERROR "Pack export failed : ${result}, ${out}")
         endif()
+
+    - name: Upload export
+      uses: actions/upload-artifact@v1
+      with:
+        path: ./${{ matrix.config.artifact }}
+        name: ${{ matrix.config.artifact }
