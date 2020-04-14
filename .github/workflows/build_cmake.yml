@@ -73,11 +73,6 @@ jobs:
       shell: cmake -P {0}
       working-directory: ${{ github.workspace }}
       run: |
-        execute_process(COMMAND dir product
-          OUTPUT_VARIABLE out
-        )        
-        message(STATUS "dir before install = ${out}") 
-        
         execute_process(COMMAND cmake --install build  --config Debug --prefix
           RESULT_VARIABLE result
           OUTPUT_VARIABLE out
@@ -85,3 +80,7 @@ jobs:
         if (NOT result EQUAL 0)
           message(FATAL_ERROR "Install to export failed : ${result}, ${out}")
         endif()
+        execute_process(COMMAND dir export
+          OUTPUT_VARIABLE out
+        )        
+        message(STATUS "dir export = ${out}") 
