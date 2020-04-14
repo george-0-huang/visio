@@ -16,7 +16,7 @@ using namespace testing;
 class Exception_HandlerTestFixture :public ::testing::TestWithParam<int> {
 };
 
-INSTANTIATE_TEST_CASE_P(
+INSTANTIATE_TEST_SUITE_P(
     Exception_Handler,
     Exception_HandlerTestFixture,
     ::testing::Values(
