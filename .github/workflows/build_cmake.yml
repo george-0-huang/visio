@@ -103,7 +103,6 @@ jobs:
         path: ./${{ matrix.config.artifact }}
         name: ${{ matrix.config.artifact }}
 
-
   release:
     if: contains(github.ref, 'tags/v')
     runs-on: windows-latest
@@ -129,7 +128,7 @@ jobs:
         path: ./upload_url
         name: upload_url
 
-publish:
+  publish:
     if: contains(github.ref, 'tags/v')
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
