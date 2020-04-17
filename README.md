@@ -114,9 +114,18 @@
 
 ## Release and Deployment
 
+--- Release 
+
+   From command window, create a release tag and push it to the server,  
+        git tag -a v1.0.0 -m "Release v1.0.0"
+        git push origin v1.0.0
+
+   The above event will invoke workflow to produce the releae asserts. 
    The release binary(product.exe) in .tar.xz and the matching source code can be found as assets from each release under
        https://github.com/george-0-huang/visio/releases
-       
+   
+--- Delopyment
+
    product.exe  can be deployed as a standalone exe to any location on a windows system
 
    The command to run is : product [ProductName] [Score] [State] [RuleFileName]
