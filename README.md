@@ -116,8 +116,10 @@
 
 --- Release 
 
-   From command window, create a release tag and push it to the server,  
+    From command window, create a release tag and push it to the server,  
+   
         git tag -a v1.0.0 -m "Release v1.0.0"
+    
         git push origin v1.0.0
 
    The above event will invoke workflow to produce the releae asserts. 
