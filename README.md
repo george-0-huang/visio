@@ -89,6 +89,7 @@
 ## Continuous Integration and Manual Testing 
 
 --- Manual Testing:
+
     Copy c:\repo\visio\project\product\run_sample folder to c:\repo\visio\build\test\debug\
     
     Expect to have these files under c:\repo\visio\build\test\debug
@@ -103,6 +104,7 @@
     The test will execuate all 24 unit tests.
     
 --- Conitnuous Integration 
+
     The above tests are automatically triggered by gitHuab Action workflow on every push or pull request
     For example, this link to workflow records in master branch
         https://github.com/george-0-huang/visio/actions?query=branch%3Amaster
