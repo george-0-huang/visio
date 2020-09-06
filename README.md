@@ -1,3 +1,6 @@
+#visio
+A deomo of rule base system with unit-test integrted into git action
+
 # Dynamic Rule-based Pricing System
 
     Develop a solution that allows the business to dynamically generating product pricing from a set of rules defined 
